@@ -15,6 +15,10 @@ import javax.validation.constraints.NotEmpty;
 @NamedQuery(name = Customer.ALL, query = "select c from Customer c")
 @NamedQuery(name = Customer.BY_PATTERN, 
 query = "select c from Customer c where c.name like :name ")
+
+@NamedQuery(name = Customer.BY_EMAIL, 
+query = "select c from Customer c where c.email = :email ")
+
 @Table(name = "CustomerTable")
 public class Customer {
 
@@ -24,6 +28,7 @@ public class Customer {
 
 	public static final String ALL = "find.AllCustomers";
 	public static final String BY_PATTERN = "Customer.ByPattern";
+	public static final String BY_EMAIL = "Customer.ByEMAIL";
 	
 	private String name; // NAME
 

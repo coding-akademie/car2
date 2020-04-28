@@ -7,6 +7,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -48,4 +49,12 @@ public class CustomerRest {
 		Collection<Customer> result = queryService.findCustomerByPattern(name);
 		return Response.ok(result).build();
 	}
+	
+	@Path("find/{email}")
+	@GET
+	public Customer findCustomerByEmail(@PathParam("email") String email) {
+		return queryService.findCustomerByEmail(email);
+	}
+	
+	
 }
