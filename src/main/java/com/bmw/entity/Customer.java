@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -27,6 +28,13 @@ public class Customer {
 	public Long getId() {
 		return id;
 	}
+	
+	@PrePersist
+	private void initDate() {
+		setCreatedDate(LocalDate.now());
+		// createDate = LocalDate.now();
+	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
