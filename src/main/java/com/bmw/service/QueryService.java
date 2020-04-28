@@ -48,4 +48,12 @@ public class QueryService {
 	}
 	
 	
+	public List countCustomerByEmail(String email) {
+		List result = entityManager
+				.createNativeQuery("select count (id) from CustomerTable where exists (select id from CustomerTable where email = ?)")
+				.setParameter(1, email).getResultList();
+		return result;
+	}
+ 
+
 }
