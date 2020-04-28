@@ -6,11 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
-@Entity
+
+@NamedQuery(name = Customer.ALL, query = "select c from Customer c")
 @Table(name = "CustomerTable")
 public class Customer {
 
@@ -18,6 +20,9 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	public static final String ALL = "find.AllCustomers";
+	
+	
 	private String name; // NAME
 
 	// @NotEmpty(message = "Email darf nicht leer sein!")
