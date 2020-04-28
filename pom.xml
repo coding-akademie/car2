@@ -5,7 +5,8 @@
     <artifactId>car2</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <dependencies>
+    
+     <dependencies>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
@@ -19,10 +20,52 @@
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+			<groupId>fish.payara.extras</groupId>
+			<artifactId>payara-embedded-all</artifactId>
+			<version>5.201</version>
+			<scope>test</scope>
+		</dependency>
+		
     </dependencies>
     <build>
         <finalName>car2</finalName>
     </build>
+    
+    
+    <profiles>
+		<profile>
+			<id>payara</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>fish.payara.maven.plugins</groupId>
+						<artifactId>payara-micro-maven-plugin</artifactId>
+						<version>1.0.7</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>bundle</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<useUberJar>true</useUberJar>
+							<deployWar>true</deployWar>
+							<payaraVersion>5.201</payaraVersion>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+    
+    
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
