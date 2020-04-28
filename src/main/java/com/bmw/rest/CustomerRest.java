@@ -1,11 +1,14 @@
 package com.bmw.rest;
 
+import java.util.Collection;
+
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -38,4 +41,11 @@ public class CustomerRest {
 		return Response.ok(queryService.findAllCustomers()).build();
 	}
 	
+	
+	@Path("pattern")   // url/car2/customer/pattern/name=?
+	@GET
+	public Response findCustomerByPattern(@QueryParam("name") String name) {
+		Collection<Customer> result = queryService.findCustomerByPattern(name);
+		return Response.ok(result).build();
+	}
 }

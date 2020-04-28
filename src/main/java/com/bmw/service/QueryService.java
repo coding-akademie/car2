@@ -1,5 +1,6 @@
 package com.bmw.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -20,4 +21,15 @@ public class QueryService {
 				.createNamedQuery(Customer.ALL, Customer.class)
 				.getResultList();
 	}
+	
+	public Collection<Customer> findCustomerByPattern(String name){
+		return entityManager
+				.createNamedQuery(Customer.BY_PATTERN)
+				.setParameter("name", name)
+				.getResultList();
+	}
+	
+	
+	
+	
 }
